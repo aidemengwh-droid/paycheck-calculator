@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wyoming Paycheck Calculator — Take-Home Pay After Taxes</title>
+<meta name="description" content="Free Wyoming paycheck calculator. Calculate your take-home pay after federal tax, Wyoming state income tax, Social Security, and Medicare. Instant, no sign-up.">
+<meta name="keywords" content="Wyoming paycheck calculator, Wyoming take home pay, Wyoming income tax calculator, Wyoming salary calculator, Wyoming tax rate">
+<link rel="canonical" href="https://paycheck.bussicalc.com/wyoming">
+<meta property="og:title" content="Wyoming Paycheck Calculator — Take-Home Pay After Taxes">
+<meta property="og:description" content="Free Wyoming paycheck calculator. See your net pay after federal tax, Wyoming state tax, and FICA.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://paycheck.bussicalc.com/wyoming">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Wyoming Paycheck Calculator",
+  "url": "https://paycheck.bussicalc.com/wyoming",
+  "description": "Free Wyoming paycheck calculator. Calculate your take-home pay after federal tax, Wyoming state tax, Social Security, and Medicare.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the income tax rate in Wyoming?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Wyoming has no state income tax. Residents only pay federal income tax and FICA (Social Security and Medicare). This means your take-home pay is higher compared to states with income tax."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much will my paycheck be in Wyoming?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In Wyoming, your paycheck deductions include only federal income tax, Social Security (6.2%), and Medicare (1.45%). There is no state income tax withholding. Use the calculator above to see your exact take-home pay."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Wyoming a good state for taxes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Wyoming is considered tax-friendly because it has no state income tax. However, Wyoming may have higher property taxes or sales taxes to compensate. Overall, high earners benefit the most from no state income tax."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1BBZEN3LC3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1BBZEN3LC3');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Paycheck Calc</a>
+    <a href="/" class="active">Paycheck Calculator</a>
+    <a href="/hourly-to-salary.html">Hourly to Salary</a>
+    <a href="/salary-to-hourly.html">Salary to Hourly</a>
+    <a href="/overtime-calculator.html">Overtime Calculator</a>
+  </div>
+</nav>
+
+<main class="container">
+
+  <div class="hero">
+    <h1>Wyoming Paycheck Calculator</h1>
+    <p>Calculate your take-home pay in Wyoming after federal income tax, Social Security, and Medicare. Free, instant, no sign-up.</p>
+  </div>
+
+  <div class="calc-grid">
+    <div class="card">
+      <h2>Your Salary</h2>
+
+      <div class="form-group">
+        <label>Gross Annual Salary <span class="hint">(before taxes)</span></label>
+        <div class="input-group">
+          <span class="input-prefix">$</span>
+          <input type="number" id="annualSalary" class="with-prefix" value="75000" min="0" step="1000" placeholder="75000">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Filing Status</label>
+        <div class="radio-group">
+          <input type="radio" name="filingStatus" id="fs-single" value="single" checked>
+          <label for="fs-single">Single</label>
+          <input type="radio" name="filingStatus" id="fs-married" value="married">
+          <label for="fs-married">Married</label>
+          <input type="radio" name="filingStatus" id="fs-head" value="head">
+          <label for="fs-head">Head of Household</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>State</label>
+        <select id="stateSelect">
+          <option value="AL">Alabama</option>
+          <option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option>
+          <option value="AR">Arkansas</option>
+          <option value="CA">California</option>
+          <option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option>
+          <option value="DE">Delaware</option>
+          <option value="DC">District of Columbia</option>
+          <option value="FL">Florida</option>
+          <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY" selected>Wyoming</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Pay Frequency</label>
+        <select id="payFrequency">
+          <option value="weekly">Weekly (52 paychecks)</option>
+          <option value="biweekly" selected>Bi-Weekly (26 paychecks)</option>
+          <option value="semimonthly">Semi-Monthly (24 paychecks)</option>
+          <option value="monthly">Monthly (12 paychecks)</option>
+          <option value="annually">Annually (1 paycheck)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="calculateAndDisplay()">Calculate My Paycheck</button>
+    </div>
+
+    <div class="card results" id="resultsCard">
+      <h2>Your Results</h2>
+
+      <div class="result-hero">
+        <div class="label">Your Take-Home Pay Per Paycheck</div>
+        <div class="amount" id="netPaycheck">$0.00</div>
+        <div class="sub" id="netAnnual">$0.00 per year after taxes</div>
+      </div>
+
+      <table class="result-table">
+        <thead>
+          <tr><th>Breakdown</th><th>Per Paycheck</th></tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+
+      <div class="callout" id="effectiveRateCallout" style="margin-top:20px;">
+        <strong>Effective Tax Rate:</strong> <span id="effectiveRate">0%</span> of your gross income goes to taxes.
+      </div>
+
+      <div class="disclaimer">
+        <strong>Disclaimer:</strong> This calculator provides estimates based on 2025 federal and Wyoming state tax brackets. Actual paychecks may vary due to additional withholdings, pre-tax deductions, local taxes, and other factors.
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>Wyoming Income Tax Information</h2>
+    <p>Wyoming has no state income tax.</p>
+    
+    <div class="callout" style="background: var(--success-light); border-left-color: var(--success);">
+      <strong>Wyoming has no state income tax!</strong> Your paycheck deductions include only federal income tax and FICA (Social Security + Medicare).
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>State Income Tax</h4>
+        <p><strong>Rate:</strong> 0% (No state income tax)<br>Wyoming has no state income tax.</p>
+      </div>
+      <div class="info-card">
+        <h4>Federal Taxes</h4>
+        <p>All Wyoming residents still pay federal income tax (10-37% progressive) and FICA: Social Security (6.2% up to $176,100) and Medicare (1.45%).</p>
+      </div>
+    </div>
+
+    <h3>About This Wyoming Paycheck Calculator</h3>
+    <p>This calculator estimates your take-home pay in Wyoming using 2025 federal tax brackets, FICA rates, and Wyoming state income tax rules. Since Wyoming has no state income tax, your deductions are lower compared to most other states.</p>
+  </div>
+
+  <div class="info-section">
+    <h2>Paycheck Calculator by State</h2>
+    <p>Select another state for a state-specific paycheck calculator:</p>
+    <div class="state-grid" id="stateGrid"></div>
+  </div>
+
+  <div class="faq-section">
+    <h2>Wyoming Paycheck FAQ</h2>
+    <details class="faq-item" open>
+      <summary>What is the income tax rate in Wyoming?</summary>
+      <p>Wyoming has no state income tax. Residents only pay federal income tax and FICA (Social Security and Medicare). This means your take-home pay is higher compared to states with income tax.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How much will my paycheck be in Wyoming?</summary>
+      <p>In Wyoming, your paycheck deductions include only federal income tax, Social Security (6.2%), and Medicare (1.45%). There is no state income tax withholding. Use the calculator above to see your exact take-home pay.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is Wyoming a good state for taxes?</summary>
+      <p>Yes, Wyoming is considered tax-friendly because it has no state income tax. However, Wyoming may have higher property taxes or sales taxes to compensate. Overall, high earners benefit the most from no state income tax.</p>
+    </details>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 Paycheck Calculator. All calculations are estimates based on 2025 tax rates.</p>
+  <p>
+    <a href="/">Paycheck Calculator</a>
+    <a href="/hourly-to-salary.html">Hourly to Salary</a>
+    <a href="/salary-to-hourly.html">Salary to Hourly</a>
+    <a href="/overtime-calculator.html">Overtime Calculator</a>
+  </p>
+</footer>
+
+<script src="/assets/tax-data.js"></script>
+<script>
+function calculateAndDisplay() {
+  const grossAnnual = parseFloat(document.getElementById('annualSalary').value) || 0;
+  const filingStatus = document.querySelector('input[name="filingStatus"]:checked').value;
+  const stateCode = document.getElementById('stateSelect').value;
+  const payFrequency = document.getElementById('payFrequency').value;
+  const freqDivisor = PAY_FREQUENCY[payFrequency];
+
+  const result = calculatePaycheck({
+    grossAnnual,
+    filingStatus,
+    stateCode,
+    payFrequency: freqDivisor
+  });
+
+  const resultsCard = document.getElementById('resultsCard');
+  resultsCard.classList.add('show');
+
+  document.getElementById('netPaycheck').textContent = formatCurrency(result.netPaycheck);
+  document.getElementById('netAnnual').textContent = formatCurrency(result.netAnnual) + ' per year after taxes';
+
+  const tbody = document.getElementById('resultBody');
+  const rows = [
+    { label: 'Gross Pay', value: result.grossPaycheck, cls: '' },
+    { label: 'Federal Income Tax', value: -result.federalTax / freqDivisor, cls: 'deduct' },
+    { label: 'Social Security (6.2%)', value: -result.fica.socialSecurity / freqDivisor, cls: 'deduct' },
+    { label: 'Medicare (1.45%)', value: -result.fica.medicare / freqDivisor, cls: 'deduct' }
+  ];
+
+  if (result.fica.additionalMedicare > 0) {
+    rows.push({ label: 'Additional Medicare (0.9%)', value: -result.fica.additionalMedicare / freqDivisor, cls: 'deduct' });
+  }
+
+  if (result.stateTax > 0) {
+    rows.push({ label: 'State Tax (' + result.stateName + ')', value: -result.stateTax / freqDivisor, cls: 'deduct' });
+  } else {
+    rows.push({ label: 'State Tax (' + result.stateName + ')', value: 0, cls: '' });
+  }
+
+  rows.push({ label: 'Take-Home Pay', value: result.netPaycheck, cls: 'net' });
+
+  tbody.innerHTML = rows.map(r =>
+    '<tr class="' + r.cls + '"><td>' + r.label + '</td><td>' + (r.value < 0 ? '-' : '') + formatCurrency(Math.abs(r.value)) + '</td></tr>'
+  ).join('');
+
+  document.getElementById('effectiveRate').textContent = formatPercent(result.effectiveRate);
+
+  if (window.innerWidth < 769) {
+    resultsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Build state grid
+var stateSlugs = {"AL": "alabama", "AK": "alaska", "AZ": "arizona", "AR": "arkansas", "CA": "california", "CO": "colorado", "CT": "connecticut", "DE": "delaware", "DC": "district-of-columbia", "FL": "florida", "GA": "georgia", "HI": "hawaii", "ID": "idaho", "IL": "illinois", "IN": "indiana", "IA": "iowa", "KS": "kansas", "KY": "kentucky", "LA": "louisiana", "ME": "maine", "MD": "maryland", "MA": "massachusetts", "MI": "michigan", "MN": "minnesota", "MS": "mississippi", "MO": "missouri", "MT": "montana", "NE": "nebraska", "NV": "nevada", "NH": "new-hampshire", "NJ": "new-jersey", "NM": "new-mexico", "NY": "new-york", "NC": "north-carolina", "ND": "north-dakota", "OH": "ohio", "OK": "oklahoma", "OR": "oregon", "PA": "pennsylvania", "RI": "rhode-island", "SC": "south-carolina", "SD": "south-dakota", "TN": "tennessee", "TX": "texas", "UT": "utah", "VT": "vermont", "VA": "virginia", "WA": "washington", "WV": "west-virginia", "WI": "wisconsin", "WY": "wyoming"};
+var stateGrid = document.getElementById('stateGrid');
+stateGrid.innerHTML = Object.keys(STATE_TAX).map(function(code) {
+  return '<a href="/' + stateSlugs[code] + '" class="state-link">' + STATE_TAX[code].name + '</a>';
+}).join('');
+
+calculateAndDisplay();
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hourly to Salary Calculator — Convert Hourly Wage to Annual Salary</title>
+<meta name="description" content="Free hourly to salary calculator. Convert your hourly wage to annual, monthly, bi-weekly, and weekly salary. See your equivalent yearly income instantly.">
+<meta name="keywords" content="hourly to salary calculator, hourly to annual salary, hourly wage to yearly, convert hourly to salary, hourly rate to annual">
+<link rel="canonical" href="https://paycheck.bussicalc.com/hourly-to-salary">
+<meta property="og:title" content="Hourly to Salary Calculator — Convert Hourly Wage to Annual Salary">
+<meta property="og:description" content="Free hourly to salary calculator. Convert your hourly wage to annual, monthly, bi-weekly, and weekly salary.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://paycheck.bussicalc.com/hourly-to-salary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hourly to Salary Calculator",
+  "url": "https://paycheck.bussicalc.com/hourly-to-salary",
+  "description": "Convert your hourly wage to annual, monthly, bi-weekly, and weekly salary.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you convert hourly wage to annual salary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To convert hourly wage to annual salary, multiply your hourly rate by the number of hours worked per week, then multiply by 52 weeks. For example, $25/hour × 40 hours/week × 52 weeks = $52,000/year."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many work hours are in a year?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A full-time worker typically works 2,080 hours per year (40 hours/week × 52 weeks). However, if you account for 2 weeks of unpaid vacation, the actual working hours are 2,000 (40 × 50)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is $25 an hour a good salary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "$25/hour equals $52,000/year at 40 hours/week. This is slightly above the US median individual income. Whether it's 'good' depends on your location, expenses, and lifestyle. In low-cost states, it's comfortable; in high-cost cities, it may be tight."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1BBZEN3LC3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1BBZEN3LC3');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Paycheck Calc</a>
+    <a href="/">Paycheck Calculator</a>
+    <a href="/hourly-to-salary.html" class="active">Hourly to Salary</a>
+    <a href="/salary-to-hourly.html">Salary to Hourly</a>
+    <a href="/overtime-calculator.html">Overtime Calculator</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="hero">
+    <h1>Hourly to Salary Calculator</h1>
+    <p>Convert your hourly wage to annual, monthly, bi-weekly, and weekly salary. See your equivalent yearly income instantly.</p>
+  </div>
+
+  <div class="calc-grid">
+    <div class="card">
+      <h2>Enter Your Hourly Wage</h2>
+      <div class="form-group">
+        <label>Hourly Wage</label>
+        <div class="input-group">
+          <span class="input-prefix">$</span>
+          <input type="number" id="hourlyWage" class="with-prefix" value="25" min="0" step="0.50" placeholder="25.00">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Hours Per Week</label>
+        <input type="number" id="hoursPerWeek" value="40" min="1" max="168" step="1">
+      </div>
+      <div class="form-group">
+        <label>Weeks Per Year</label>
+        <select id="weeksPerYear">
+          <option value="52">52 weeks (No vacation)</option>
+          <option value="50" selected>50 weeks (2 weeks vacation)</option>
+          <option value="48">48 weeks (4 weeks vacation)</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="calculateSalary()">Calculate Salary</button>
+    </div>
+
+    <div class="card results show" id="resultsCard">
+      <h2>Your Equivalent Salary</h2>
+      <div class="result-hero">
+        <div class="label">Annual Salary</div>
+        <div class="amount" id="annualSalary">$0</div>
+        <div class="sub" id="hourlyBreakdown">at $0/hour</div>
+      </div>
+      <table class="result-table">
+        <thead>
+          <tr><th>Pay Period</th><th>Amount</th></tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>How to Convert Hourly Wage to Salary</h2>
+    <p>Converting your hourly wage to an annual salary is straightforward. The formula is:</p>
+    <div class="callout">
+      <strong>Annual Salary = Hourly Wage × Hours Per Week × Weeks Per Year</strong>
+    </div>
+    <p>For example, if you earn $25/hour, work 40 hours/week, and work 50 weeks/year (2 weeks of unpaid vacation):</p>
+    <ul>
+      <li>$25 × 40 × 50 = <strong>$50,000/year</strong></li>
+      <li>$50,000 ÷ 12 = <strong>$4,166.67/month</strong></li>
+      <li>$50,000 ÷ 26 = <strong>$1,923.08/bi-weekly</strong></li>
+      <li>$50,000 ÷ 52 = <strong>$961.54/week</strong></li>
+    </ul>
+
+    <h3>Does this include taxes?</h3>
+    <p>No, this calculator shows your <strong>gross salary</strong> (before taxes). To see your take-home pay after taxes, use our <a href="/">Paycheck Calculator</a> and enter the annual salary you get here.</p>
+
+    <h3>Common Hourly to Salary Conversions</h3>
+    <div class="info-grid">
+      <div class="info-card"><h4>$15/hour</h4><p>$31,200/year (40hrs × 52wks)</p></div>
+      <div class="info-card"><h4>$20/hour</h4><p>$41,600/year (40hrs × 52wks)</p></div>
+      <div class="info-card"><h4>$25/hour</h4><p>$52,000/year (40hrs × 52wks)</p></div>
+      <div class="info-card"><h4>$30/hour</h4><p>$62,400/year (40hrs × 52wks)</p></div>
+      <div class="info-card"><h4>$35/hour</h4><p>$72,800/year (40hrs × 52wks)</p></div>
+      <div class="info-card"><h4>$40/hour</h4><p>$83,200/year (40hrs × 52wks)</p></div>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>How do you convert hourly wage to annual salary?</summary>
+      <p>To convert hourly wage to annual salary, multiply your hourly rate by the number of hours worked per week, then multiply by 52 weeks. For example, $25/hour × 40 hours/week × 52 weeks = $52,000/year. If you have unpaid vacation, use 50 weeks instead.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How many work hours are in a year?</summary>
+      <p>A full-time worker typically works 2,080 hours per year (40 hours/week × 52 weeks). If you account for 2 weeks of unpaid vacation, the actual working hours are 2,000 (40 × 50). Part-time workers should adjust accordingly.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is $25 an hour a good salary?</summary>
+      <p>$25/hour equals $52,000/year at 40 hours/week (52 weeks). This is slightly above the US median individual income. Whether it's comfortable depends on your location — in low-cost states it provides a good living, while in high-cost cities like San Francisco or New York, it may be tight.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What's the difference between exempt and non-exempt employees?</summary>
+      <p>Non-exempt employees are paid hourly and must receive overtime pay (1.5× regular rate) for hours over 40/week. Exempt employees are typically salaried and exempt from overtime. This calculator is most relevant for non-exempt hourly workers.</p>
+    </details>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 Paycheck Calculator. All calculations are estimates.</p>
+  <p>
+    <a href="/">Paycheck Calculator</a>
+    <a href="/hourly-to-salary.html">Hourly to Salary</a>
+    <a href="/salary-to-hourly.html">Salary to Hourly</a>
+    <a href="/overtime-calculator.html">Overtime Calculator</a>
+  </p>
+</footer>
+
+<script>
+function calculateSalary() {
+  const hourly = parseFloat(document.getElementById('hourlyWage').value) || 0;
+  const hours = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+  const weeks = parseFloat(document.getElementById('weeksPerYear').value) || 0;
+
+  const annual = hourly * hours * weeks;
+  const monthly = annual / 12;
+  const biweekly = annual / 26;
+  const weekly = annual / weeks;
+  const daily = hourly * hours;
+
+  document.getElementById('annualSalary').textContent = '$' + annual.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  document.getElementById('hourlyBreakdown').textContent = `at $${hourly.toFixed(2)}/hour × ${hours} hrs/week × ${weeks} weeks`;
+
+  const rows = [
+    { label: 'Annual Salary', value: annual },
+    { label: 'Monthly', value: monthly },
+    { label: 'Bi-Weekly', value: biweekly },
+    { label: 'Weekly', value: weekly },
+    { label: 'Daily', value: daily },
+    { label: 'Hourly', value: hourly }
+  ];
+
+  document.getElementById('resultBody').innerHTML = rows.map(r =>
+    `<tr><td>${r.label}</td><td>$${r.value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td></tr>`
+  ).join('');
+}
+calculateSalary();
+</script>
+</body>
+</html>

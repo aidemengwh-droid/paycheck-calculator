@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overtime Calculator — Calculate Overtime Pay at 1.5x Rate</title>
+<meta name="description" content="Free overtime calculator. Calculate your overtime pay at 1.5x your regular rate. Enter your hourly wage and overtime hours to see your total pay including overtime.">
+<meta name="keywords" content="overtime calculator, overtime pay calculator, time and a half calculator, overtime rate, calculate overtime pay">
+<link rel="canonical" href="https://paycheck.bussicalc.com/overtime-calculator">
+<meta property="og:title" content="Overtime Calculator — Calculate Overtime Pay at 1.5x Rate">
+<meta property="og:description" content="Free overtime calculator. Calculate your overtime pay at 1.5x your regular rate. See your total pay including overtime.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://paycheck.bussicalc.com/overtime-calculator">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Overtime Calculator",
+  "url": "https://paycheck.bussicalc.com/overtime-calculator",
+  "description": "Calculate your overtime pay at 1.5x your regular rate. See total pay including overtime hours.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is overtime pay calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under the Fair Labor Standards Act (FLSA), overtime is paid at 1.5 times your regular hourly rate for any hours worked over 40 in a workweek. For example, if your regular rate is $20/hour, your overtime rate is $30/hour."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is time and a half?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Time and a half means you are paid 1.5 times your regular hourly rate for overtime hours. If your regular rate is $20/hour, time and a half is $30/hour ($20 × 1.5)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When am I entitled to overtime pay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non-exempt employees are entitled to overtime pay (1.5x regular rate) for any hours worked over 40 in a workweek under federal law. Some states have daily overtime laws (e.g., California requires overtime after 8 hours/day). Exempt employees (certain salaried professionals) are not entitled to overtime."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is double time pay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Double time means you are paid 2 times your regular hourly rate. Federal law does not require double time pay, but some states like California mandate it for hours worked over 12 in a day or on the 7th consecutive day of work."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1BBZEN3LC3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1BBZEN3LC3');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Paycheck Calc</a>
+    <a href="/">Paycheck Calculator</a>
+    <a href="/hourly-to-salary.html">Hourly to Salary</a>
+    <a href="/salary-to-hourly.html">Salary to Hourly</a>
+    <a href="/overtime-calculator.html" class="active">Overtime Calculator</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="hero">
+    <h1>Overtime Calculator</h1>
+    <p>Calculate your overtime pay at 1.5x your regular rate. Enter your hourly wage, regular hours, and overtime hours to see your total weekly pay.</p>
+  </div>
+
+  <div class="calc-grid">
+    <div class="card">
+      <h2>Your Work Hours</h2>
+
+      <div class="form-group">
+        <label>Hourly Wage</label>
+        <div class="input-group">
+          <span class="input-prefix">$</span>
+          <input type="number" id="hourlyWage" class="with-prefix" value="20" min="0" step="0.50" placeholder="20.00">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Regular Hours <span class="hint">(up to 40)</span></label>
+        <input type="number" id="regularHours" value="40" min="0" max="40" step="1">
+      </div>
+
+      <div class="form-group">
+        <label>Overtime Hours <span class="hint">(over 40/week)</span></label>
+        <input type="number" id="overtimeHours" value="10" min="0" step="1">
+      </div>
+
+      <div class="form-group">
+        <label>Overtime Rate</label>
+        <select id="overtimeMultiplier">
+          <option value="1.5" selected>1.5x (Time and a half — Federal standard)</option>
+          <option value="2.0">2.0x (Double time)</option>
+          <option value="1.0">1.0x (Regular rate)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="calculateOvertime()">Calculate Overtime Pay</button>
+    </div>
+
+    <div class="card results show" id="resultsCard">
+      <h2>Your Weekly Pay</h2>
+      <div class="result-hero">
+        <div class="label">Total Weekly Pay</div>
+        <div class="amount" id="totalPay">$0.00</div>
+        <div class="sub" id="payBreakdown">Regular + Overtime</div>
+      </div>
+      <table class="result-table">
+        <thead>
+          <tr><th>Breakdown</th><th>Amount</th></tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>How Overtime Pay Works</h2>
+    <p>Under the Fair Labor Standards Act (FLSA), non-exempt employees must be paid overtime at <strong>1.5 times their regular rate</strong> for any hours worked over 40 in a workweek.</p>
+
+    <div class="callout">
+      <strong>Overtime Rate = Regular Hourly Rate × 1.5</strong><br>
+      <strong>Total Pay = (Regular Hours × Regular Rate) + (Overtime Hours × Overtime Rate)</strong>
+    </div>
+
+    <h3>Example Calculation</h3>
+    <p>If you earn $20/hour, work 40 regular hours + 10 overtime hours:</p>
+    <ul>
+      <li>Regular pay: 40 × $20 = <strong>$800</strong></li>
+      <li>Overtime rate: $20 × 1.5 = <strong>$30/hour</strong></li>
+      <li>Overtime pay: 10 × $30 = <strong>$300</strong></li>
+      <li>Total weekly pay: $800 + $300 = <strong>$1,100</strong></li>
+    </ul>
+
+    <h3>State-Specific Overtime Rules</h3>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>California</h4>
+        <p>Overtime after 8 hours/day (1.5x) and after 12 hours/day (2.0x). Also 7th consecutive day rules.</p>
+      </div>
+      <div class="info-card">
+        <h4>Alaska</h4>
+        <p>Overtime after 8 hours/day or 40 hours/week, whichever is greater.</p>
+      </div>
+      <div class="info-card">
+        <h4>Nevada</h4>
+        <p>Overtime after 8 hours/day if earning less than 1.5x minimum wage, or 40 hours/week.</p>
+      </div>
+      <div class="info-card">
+        <h4>Federal (FLSA)</h4>
+        <p>Overtime after 40 hours/week at 1.5x regular rate. Applies to non-exempt employees nationwide.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="background: var(--accent-light); border-left-color: var(--accent);">
+      <strong>Note:</strong> Exempt employees (certain salaried professionals, executives, and administrators earning above $43,888/year in 2025) are not entitled to overtime under federal law.
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>How is overtime pay calculated?</summary>
+      <p>Under the FLSA, overtime is paid at 1.5 times your regular hourly rate for hours worked over 40 in a workweek. For example, if your regular rate is $20/hour, your overtime rate is $30/hour ($20 × 1.5). Some states have additional daily overtime requirements.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What is time and a half?</summary>
+      <p>Time and a half means you are paid 1.5 times your regular hourly rate for overtime hours. If your regular rate is $20/hour, time and a half is $30/hour ($20 × 1.5). This is the standard federal overtime rate under the FLSA.</p>
+    </details>
+    <details class="faq-item">
+      <summary>When am I entitled to overtime pay?</summary>
+      <p>Non-exempt employees are entitled to overtime pay (1.5x regular rate) for any hours worked over 40 in a workweek under federal law. Some states like California require overtime after 8 hours in a day. Exempt employees (certain salaried professionals earning above $43,888/year in 2025) are not entitled to overtime.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What is double time pay?</summary>
+      <p>Double time means 2x your regular hourly rate. Federal law does not require double time, but states like California mandate it for hours over 12/day or on the 7th consecutive workday. Check your state labor laws for specific requirements.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Can my employer give comp time instead of overtime pay?</summary>
+      <p>For private sector non-exempt employees, employers generally must pay overtime in cash, not comp time. Public sector (government) employees may receive comp time under certain conditions. Always check your state labor laws.</p>
+    </details>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 Paycheck Calculator. All calculations are estimates based on 2025 FLSA rules.</p>
+  <p>
+    <a href="/">Paycheck Calculator</a>
+    <a href="/hourly-to-salary.html">Hourly to Salary</a>
+    <a href="/salary-to-hourly.html">Salary to Hourly</a>
+    <a href="/overtime-calculator.html">Overtime Calculator</a>
+  </p>
+</footer>
+
+<script>
+function calculateOvertime() {
+  const wage = parseFloat(document.getElementById('hourlyWage').value) || 0;
+  const regHours = parseFloat(document.getElementById('regularHours').value) || 0;
+  const otHours = parseFloat(document.getElementById('overtimeHours').value) || 0;
+  const multiplier = parseFloat(document.getElementById('overtimeMultiplier').value) || 1.5;
+
+  const overtimeRate = wage * multiplier;
+  const regularPay = wage * regHours;
+  const overtimePay = overtimeRate * otHours;
+  const totalPay = regularPay + overtimePay;
+  const annualTotal = totalPay * 52;
+
+  document.getElementById('totalPay').textContent = '$' + totalPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  document.getElementById('payBreakdown').textContent = `${regHours} regular hrs + ${otHours} overtime hrs`;
+
+  const rows = [
+    { label: 'Regular Rate', value: wage },
+    { label: 'Overtime Rate', value: overtimeRate },
+    { label: `Regular Pay (${regHours} hrs)`, value: regularPay },
+    { label: `Overtime Pay (${otHours} hrs)`, value: overtimePay },
+    { label: 'Total Weekly Pay', value: totalPay, cls: 'net' },
+    { label: 'Estimated Annual (×52)', value: annualTotal, cls: '' }
+  ];
+
+  document.getElementById('resultBody').innerHTML = rows.map(r =>
+    `<tr class="${r.cls || ''}"><td>${r.label}</td><td>$${r.value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td></tr>`
+  ).join('');
+}
+calculateOvertime();
+</script>
+</body>
+</html>
