@@ -119,7 +119,7 @@ const STATE_TAX = {
     { rate: 0.072, min: 30000, max: 48000 },
     { rate: 0.079, min: 48000, max: 60000 },
     { rate: 0.082, min: 60000, max: 150000 },
-    { rate: 0.089, min: 15000, max: 175000 },
+    { rate: 0.089, min: 150000, max: 175000 },
     { rate: 0.097, min: 175000, max: 200000 },
     { rate: 0.10, min: 200000, max: Infinity }
   ], standardDeduction: 2200 },
@@ -366,8 +366,9 @@ function calculatePaycheck(params) {
   // FICA
   const fica = calculateFICA(grossAnnual, filingStatus);
 
-  // State income tax
-  const stateResult = calculateStateTax(fedTaxableIncome, stateCode);
+  // State income tax — use grossAnnual, not fedTaxableIncome,
+  // because each state has its own standard deduction rules
+  const stateResult = calculateStateTax(grossAnnual, stateCode);
 
   // Total deductions
   const totalTax = federalTax + fica.total + stateResult.tax;

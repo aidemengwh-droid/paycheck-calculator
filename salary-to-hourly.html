@@ -194,7 +194,7 @@ function calculateHourly() {
   const monthly = salary / 12;
   const biweekly = salary / 26;
   const weekly = weeks > 0 ? salary / weeks : 0;
-  const daily = hours > 0 ? hourly * hours : 0;
+  const daily = weekly / 5;
 
   document.getElementById('hourlyRate').textContent = '$' + hourly.toFixed(2);
   document.getElementById('salaryBreakdown').textContent = `from $${salary.toLocaleString('en-US')}/year (${hours} hrs × ${weeks} wks)`;
