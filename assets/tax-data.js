@@ -27,8 +27,8 @@ const FEDERAL_BRACKETS = {
     { rate: 0.10, min: 0, max: 17700 },
     { rate: 0.12, min: 17700, max: 67450 },
     { rate: 0.22, min: 67450, max: 105700 },
-    { rate: 0.24, min: 105700, max: 201775 },
-    { rate: 0.32, min: 201775, max: 256200 },
+    { rate: 0.24, min: 105700, max: 201750 },
+    { rate: 0.32, min: 201750, max: 256200 },
     { rate: 0.35, min: 256200, max: 640600 },
     { rate: 0.37, min: 640600, max: Infinity }
   ]
@@ -63,7 +63,7 @@ const STATE_TAX = {
     { rate: 0.05, min: 3000, max: Infinity }
   ], standardDeduction: 3000 },
   AK: { name: "Alaska", type: "none", rate: 0 },
-  AZ: { name: "Arizona", type: "flat", rate: 0.025, standardDeduction: 13950 },
+  AZ: { name: "Arizona", type: "flat", rate: 0.025, standardDeduction: 15750 },
   AR: { name: "Arkansas", type: "progressive", brackets: [
     { rate: 0.02, min: 0, max: 5000 },
     { rate: 0.03, min: 5000, max: 10000 },
