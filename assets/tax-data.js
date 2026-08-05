@@ -1,50 +1,50 @@
 /* ========================================
    Paycheck Calculator — Tax Data & Logic
-   2025 Federal Tax Brackets + State Rates
+   2026 Federal Tax Brackets + State Rates
    ======================================== */
 
-// ---- 2025 Federal Income Tax Brackets ----
+// ---- 2026 Federal Income Tax Brackets ----
 const FEDERAL_BRACKETS = {
   single: [
-    { rate: 0.10, min: 0, max: 11925 },
-    { rate: 0.12, min: 11925, max: 48475 },
-    { rate: 0.22, min: 48475, max: 103350 },
-    { rate: 0.24, min: 103350, max: 197300 },
-    { rate: 0.32, min: 197300, max: 250525 },
-    { rate: 0.35, min: 250525, max: 626350 },
-    { rate: 0.37, min: 626350, max: Infinity }
+    { rate: 0.10, min: 0, max: 12400 },
+    { rate: 0.12, min: 12400, max: 50400 },
+    { rate: 0.22, min: 50400, max: 105700 },
+    { rate: 0.24, min: 105700, max: 201775 },
+    { rate: 0.32, min: 201775, max: 256225 },
+    { rate: 0.35, min: 256225, max: 640600 },
+    { rate: 0.37, min: 640600, max: Infinity }
   ],
   married: [
-    { rate: 0.10, min: 0, max: 23850 },
-    { rate: 0.12, min: 23850, max: 96950 },
-    { rate: 0.22, min: 96950, max: 206700 },
-    { rate: 0.24, min: 206700, max: 394600 },
-    { rate: 0.32, min: 394600, max: 501050 },
-    { rate: 0.35, min: 501050, max: 751600 },
-    { rate: 0.37, min: 751600, max: Infinity }
+    { rate: 0.10, min: 0, max: 24800 },
+    { rate: 0.12, min: 24800, max: 100800 },
+    { rate: 0.22, min: 100800, max: 211400 },
+    { rate: 0.24, min: 211400, max: 403550 },
+    { rate: 0.32, min: 403550, max: 512450 },
+    { rate: 0.35, min: 512450, max: 768700 },
+    { rate: 0.37, min: 768700, max: Infinity }
   ],
   head: [
-    { rate: 0.10, min: 0, max: 17000 },
-    { rate: 0.12, min: 17000, max: 64850 },
-    { rate: 0.22, min: 64850, max: 103350 },
-    { rate: 0.24, min: 103350, max: 197300 },
-    { rate: 0.32, min: 197300, max: 250500 },
-    { rate: 0.35, min: 250500, max: 626350 },
-    { rate: 0.37, min: 626350, max: Infinity }
+    { rate: 0.10, min: 0, max: 17700 },
+    { rate: 0.12, min: 17700, max: 67450 },
+    { rate: 0.22, min: 67450, max: 105700 },
+    { rate: 0.24, min: 105700, max: 201775 },
+    { rate: 0.32, min: 201775, max: 256200 },
+    { rate: 0.35, min: 256200, max: 640600 },
+    { rate: 0.37, min: 640600, max: Infinity }
   ]
 };
 
-// ---- 2025 Standard Deductions ----
+// ---- 2026 Standard Deductions ----
 const STANDARD_DEDUCTION = {
-  single: 15000,
-  married: 30000,
-  head: 22500
+  single: 16100,
+  married: 32200,
+  head: 24150
 };
 
-// ---- 2025 FICA ----
+// ---- 2026 FICA ----
 const FICA = {
   socialSecurityRate: 0.062,
-  socialSecurityWageBase: 176100,
+  socialSecurityWageBase: 184500,
   medicareRate: 0.0145,
   additionalMedicareRate: 0.009,
   additionalMedicareThreshold: {
@@ -54,7 +54,7 @@ const FICA = {
   }
 };
 
-// ---- State Income Tax Data (2025) ----
+// ---- State Income Tax Data (2026) ----
 // type: "none" = no income tax, "flat" = flat rate, "progressive" = bracket-based
 const STATE_TAX = {
   AL: { name: "Alabama", type: "progressive", brackets: [
@@ -321,7 +321,10 @@ function calculateFICA(grossAnnual, filingStatus) {
 }
 
 // ---- Calculate State Income Tax ----
-function calculateStateTax(taxableIncome, stateCode) {
+// Supports filing status: "single", "married", "head"
+// For states where exact married/head brackets are not stored,
+// bracket thresholds are scaled (married ×2, head ×1.5) as an approximation.
+function calculateStateTax(taxableIncome, stateCode, filingStatus) {
   const state = STATE_TAX[stateCode];
   if (!state) return { tax: 0, rate: 0, name: "Unknown", type: "none" };
 
@@ -329,19 +332,47 @@ function calculateStateTax(taxableIncome, stateCode) {
     return { tax: 0, rate: 0, name: state.name, type: "none" };
   }
 
-  let stateTaxable = taxableIncome;
+  // Determine state standard deduction based on filing status
+  let stateDeduction = 0;
   if (state.standardDeduction) {
-    stateTaxable = Math.max(0, taxableIncome - state.standardDeduction);
+    if (typeof state.standardDeduction === 'number') {
+      // Single-value deduction: scale for married/head
+      stateDeduction = state.standardDeduction;
+      if (filingStatus === 'married') stateDeduction *= 2;
+      else if (filingStatus === 'head') stateDeduction *= 1.5;
+    } else if (state.standardDeduction[filingStatus] !== undefined) {
+      stateDeduction = state.standardDeduction[filingStatus];
+    }
   }
+
+  let stateTaxable = Math.max(0, taxableIncome - stateDeduction);
 
   if (state.type === "flat") {
     const tax = stateTaxable * state.rate;
     return { tax, rate: state.rate, name: state.name, type: "flat" };
   }
 
-  // Progressive
+  // Progressive: use filing-status-specific brackets if available,
+  // otherwise scale single-filer bracket thresholds as an approximation
+  let brackets = state.brackets;
+  if (state.bracketsByStatus && state.bracketsByStatus[filingStatus]) {
+    brackets = state.bracketsByStatus[filingStatus];
+  } else if (filingStatus === 'married') {
+    brackets = state.brackets.map(b => ({
+      rate: b.rate,
+      min: b.min * 2,
+      max: b.max === Infinity ? Infinity : b.max * 2
+    }));
+  } else if (filingStatus === 'head') {
+    brackets = state.brackets.map(b => ({
+      rate: b.rate,
+      min: b.min * 1.5,
+      max: b.max === Infinity ? Infinity : b.max * 1.5
+    }));
+  }
+
   let tax = 0;
-  for (const b of state.brackets) {
+  for (const b of brackets) {
     if (stateTaxable > b.min) {
       tax += (Math.min(stateTaxable, b.max) - b.min) * b.rate;
     } else {
@@ -368,7 +399,7 @@ function calculatePaycheck(params) {
 
   // State income tax — use grossAnnual, not fedTaxableIncome,
   // because each state has its own standard deduction rules
-  const stateResult = calculateStateTax(grossAnnual, stateCode);
+  const stateResult = calculateStateTax(grossAnnual, stateCode, filingStatus);
 
   // Total deductions
   const totalTax = federalTax + fica.total + stateResult.tax;

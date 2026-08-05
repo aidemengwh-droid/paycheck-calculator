@@ -1,0 +1,6 @@
+# Redirect .html URLs to clean URLs for SEO consistency
+# Cloudflare Pages serves clean URLs automatically, but these
+# 301 redirects ensure no duplicate-content issues from .html paths
+/hourly-to-salary.html  /hourly-to-salary  301
+/salary-to-hourly.html  /salary-to-hourly  301
+/overtime-calculator.html  /overtime-calculator  301
